@@ -1,6 +1,6 @@
 launch.json
 settings.json
-models/
+# models/
 logs/
 cache/
 .olive-cache/
