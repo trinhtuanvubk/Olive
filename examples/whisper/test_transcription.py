@@ -120,7 +120,14 @@ def main(raw_args=None):
     # get output
     input_data, _ = dataset[0]
     input_data = OnnxEvaluator.format_input(input_data, olive_model.io_config)
-    output = olive_model.run_session(session, input_data)
+    
+    # Bug: ONNXModelHandler has no attribute run_session
+    # output = olive_model.run_session(session, input_data)
+    
+    # Fix: just use onnx session
+    output = session.run(None, input_data)
+    
+    
     return output[0][0]
 
 
