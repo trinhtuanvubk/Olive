@@ -124,9 +124,15 @@ def main(raw_args=None):
     # Bug: ONNXModelHandler has no attribute run_session
     # output = olive_model.run_session(session, input_data)
     
-    # Fix: just use onnx session
+    
+    # Fix and inference time: just use onnx session
+    import time
+    start = time.time()
+    
     output = session.run(None, input_data)
     
+    infer_time = time.time() - start
+    print(f"inference time: {infer_time}")
     
     return output[0][0]
 
